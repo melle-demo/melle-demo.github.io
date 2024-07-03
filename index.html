@@ -26,20 +26,20 @@
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<div class="text-center">
 	<h1>VIOLA</h1>
-        <h4>VIOLA: Causal Language Models for Speech Recognition, Synthesis, and Translation</h4>
+        <h4>MELL-E: Autoregressive Speech Synthesis\\without Vector Quantization</h4>
 		<!-- [<a href="https://arxiv.org/abs/2305.16107">Paper</a>] -->
 		
         <p class="fst-italic mb-0">
           <br>
-            Tianrui Wang*, &nbsp Long Zhou*, &nbsp Ziqiang Zhang, &nbsp Yu Wu, &nbsp Shujie Liu, &nbsp Yashesh Gaur, &nbsp  <br>
-			Zhuo Chen, &nbsp Jinyu Li, &nbsp Furu Wei 
+        	Lingwei Meng*, &nbsp Long Zhou#, &nbsp Shujie Liu, &nbsp Sanyuan Chen, &nbsp Bing Han, &nbsp Shujie Hu, &nbsp  <br>
+			Yanqing Liu, &nbsp Sheng Zhao, &nbsp Jinyu Li, &nbsp Xixin Wu, &nbsp Helen Meng, &nbsp Furu Wei 
       <p></p>
         </p>
-        <p><b>Microsoft</b></p>
+        <!-- <p><b>Microsoft</b></p> -->
 	</div>
 	<p>
         <b>Abstract.</b> 
-		Recent research shows a big convergence in model architecture, training objectives, and inference methods across various tasks for different modalities. In this paper, we propose VIOLA, a single auto-regressive Transformer decoder-only network that unifies various cross-modal tasks involving speech and text, such as speech-to-text, text-to-text, text-to-speech, and speech-to-speech tasks, as a conditional language model task via multi-task learning framework. To accomplish this, we first convert the speech utterances to discrete tokens (similar to the textual data) using an offline neural codec encoder. In such a way, all these tasks are converted to token-based sequence prediction problems, which can be naturally handled with one conditional language model. We further integrate task IDs (TID) and language IDs (LID) into the proposed model to enhance the modeling capability of handling different languages and tasks. Experimental results demonstrate that the proposed VIOLA model can support both single-modal and cross-modal tasks well, and the decoder-only model achieves a comparable and even better performance than the strong baselines. Audio samples are available at https://violademo.github.io/.
+		We present a novel continuous-valued tokens based language modeling approach, referred to as MELL-E, for text to speech synthesis (TTS). MELL-E autoregressively generates continuous mel-spectrogram frames directly from text condition, bypassing the need for vector quantization, which are originally designed for audio compression and sacrifice fidelity compared to mel-spectrograms.   Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram flux loss function to model the probability distribution of the continuous-valued tokens. (ii) we have incorporated variational inference into MELL-E to facilitate sampling mechanisms, thereby enhancing the output diversity and  model robustness. Experiments demonstrate that, compared to the two-stage codec language models VALL-E and its variants, the single-stage MELL-E mitigates robustness issues by avoiding the inherent flaws of sampling discrete codes, achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.
       </p>     
 	  <p>This page is for <b>research demonstration purposes</b> only.</p>
 
