@@ -8,6 +8,7 @@ continue
 8463-287645-0000    This was what did the mischief so far as the running away was concerned.
 3575-170457-0000    And often has my mother said, while on her lap I laid my head, she feared for time I was not made, but for eternity.
 
+
 cross
 1320-122617-0009    I greatly mourn that one so well-disposed should die in his ignorance, and I have sought a goodly hymn. Can you lead me to him?
 7176-92135-0031 And there you are. You will, of course, appreciate that the unfinished sentences not only save time, but also make the maneuvering much more natural.
@@ -27,3 +28,28 @@ cross_prompt
 7021-85628-0016	that is a very fine cap you have he said
 6930-75918-0002	congratulations were poured in upon the princess everywhere during her journey
 8555-284449-0020	the combined bands of both the countries played the music and a fine supper was served
+
+
+hard
+61-70970-0040   Two thousand two hundred twenty two happily happy two hundred and twenty-two.
+121-121726-0004 Gallant gophers gracefully gambled golden gooseberries on grandiose glaciers.
+908-157963-0018 The entrepreneur, driven by an insatiable insatiable insatiable insatiable insatiable desire for success, embarked on a journey filled with challenges, challenges, challenges, challenges, challenges, challenges, and triumphs.
+1284-1180-0011  The shimmering sheen of the silken fabric fascinated the fashionistas, creating a cacophony of compliments.
+1580-141083-0008    Learning from mistakes is is is is is is a crucial part of the journey to success.
+3575-170457-0021    Amidst the towering skyscrapers, the bustling cityscape echoed with the incessant hum hum hum hum hum of commerce and ambition.
+4446-2275-0008  Eager otters eagerly overcame eager eager obstacles.
+4507-16021-0054 The best way to predict the best way to predict the future is to create it, but sometimes, the best way to predict the future is to prevent it.
+5683-32866-0007 Funny ferrets fumbled fumblingly, funny funny feathers.
+6829-68769-0022 Confused crabs confusedly cracked confused confused crab cakes.
+
+hard_prompt
+61-70970-0040   they regained their apartment apparently without disturbing the household of gamewell
+121-121726-0004 heaven a good place to be raised to
+908-157963-0018 and fearest thou because i vanish and am seen no more
+1284-1180-0011  i am my dear and all strangers are welcome to my home
+1580-141083-0008    the proof was in three long slips i had left them all together
+3575-170457-0021    i thought it therefore my duty when i left school to become a governess
+4446-2275-0008  when did you come bartley and how did it happen you haven't spoken a word
+4507-16021-0054 that is why we cry education science
+5683-32866-0007 if a fellow's been a little bit wild he's beelzebub at once
+6829-68769-0022 we have heard something of your story said kenneth and are interested in it
