@@ -1,32 +1,32 @@
 continue
-7021-79740-0002 Now Delia contrived to obtain a great influence and ascendency over the minds of the children, by means of these dolls.
-3729-6852-0002  In order to please her, I spoke to her of the Abbe Conti, and I had occasion to quote two lines of that profound writer.
 1284-1180-0010  Unc knocked at the door of the house, and a chubby, pleasant-faced woman dressed all in blue opened it and greeted the visitors with a smile.
-4446-2271-0001  He had preconceived ideas about everything, and his idea about Americans was that they should be engineers or mechanics.
-8555-284447-0000    Then he rushed downstairs into the courtyard, shouting loudly for his soldiers, and threatening to punish everybody in his dominions, if the sailorman was not recaptured.
 1320-122612-0001    The dews were suffered to exhale, and the sun had dispersed the mists and was shedding a strong and clear light in the forest, when the travelers resumed their journey.
-8463-287645-0000    This was what did the mischief so far as the running away was concerned.
 3575-170457-0000    And often has my mother said, while on her lap I laid my head, she feared for time I was not made, but for eternity.
+3729-6852-0002  In order to please her, I spoke to her of the Abbe Conti, and I had occasion to quote two lines of that profound writer.
+4446-2271-0001  He had preconceived ideas about everything, and his idea about Americans was that they should be engineers or mechanics.
+7021-79740-0002 Now Delia contrived to obtain a great influence and ascendency over the minds of the children, by means of these dolls.
+8463-287645-0000    This was what did the mischief so far as the running away was concerned.
+8555-284447-0000    Then he rushed downstairs into the courtyard, shouting loudly for his soldiers, and threatening to punish everybody in his dominions, if the sailorman was not recaptured.
 
 
 cross
 1320-122617-0009    I greatly mourn that one so well-disposed should die in his ignorance, and I have sought a goodly hymn. Can you lead me to him?
-7176-92135-0031 And there you are. You will, of course, appreciate that the unfinished sentences not only save time, but also make the maneuvering much more natural.
-5683-32879-0014 "Yes, something, everything." said Rachel hurriedly, looking frowningly at a flower which she was twirling in her fingers.
 1580-141084-0023    In a few hours the examination would commence, and he was still in the dilemma between making the facts public, and allowing the culprit to compete for the valuable scholarship.
 4507-16021-0055 To teach reading, means to light the fire; every syllable spelled out sparkles.
-7021-85628-0018 And it is made of mother's best yarn, and she knitted it herself, and everybody wants to get it away from me.
+5683-32879-0014 "Yes, something, everything." said Rachel hurriedly, looking frowningly at a flower which she was twirling in her fingers.
 6930-75918-0006 "This has indeed been a harassing day," continued the young man, his eyes fixed upon his friend.
+7021-85628-0018 And it is made of mother's best yarn, and she knitted it herself, and everybody wants to get it away from me.
+7176-92135-0031 And there you are. You will, of course, appreciate that the unfinished sentences not only save time, but also make the maneuvering much more natural.
 8555-292519-0005    While the old gold and the marble stays, forever gleaming its soft strong blaze, calm in the early evening glow.
 
 cross_prompt
 1320-122617-0008	the young man is in bondage and much i fear his death is decreed
-7176-92135-0024	to be or not to be that is the question whether tis nobler
-5683-32879-0012	thank you rachel my cousin rachel my only friend
 1580-141084-0021	on the palm were three little pyramids of black doughy clay
 4507-16021-0054	that is why we cry education science
-7021-85628-0016	that is a very fine cap you have he said
+5683-32879-0012	thank you rachel my cousin rachel my only friend
 6930-75918-0002	congratulations were poured in upon the princess everywhere during her journey
+7021-85628-0016	that is a very fine cap you have he said
+7176-92135-0024	to be or not to be that is the question whether tis nobler
 8555-284449-0020	the combined bands of both the countries played the music and a fine supper was served
 
 
