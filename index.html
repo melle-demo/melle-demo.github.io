@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="css/normalize.css">
 
-	<title>MELL-E</title>
+	<title>MELLE</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -25,7 +25,7 @@
 
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<div class="text-center">
-	<h1>MELL-E</h1>
+	<h1>MELLE</h1>
         <h4>Autoregressive Speech Synthesis without Vector Quantization</h4>
 		<!-- [<a href="https://arxiv.org/abs/2305.16107">Paper</a>] -->
 		
@@ -39,7 +39,7 @@
 	</div>
 	<p>
         <b>Abstract.</b> 
-		We present a novel continuous-valued tokens based language modeling approach, referred to as MELL-E, for text to speech synthesis (TTS). MELL-E autoregressively generates continuous mel-spectrogram frames directly from text condition, bypassing the need for vector quantization, which are originally designed for audio compression and sacrifice fidelity compared to mel-spectrograms.   Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram flux loss function to model the probability distribution of the continuous-valued tokens. (ii) we have incorporated variational inference into MELL-E to facilitate sampling mechanisms, thereby enhancing the output diversity and  model robustness. Experiments demonstrate that, compared to the two-stage codec language models VALL-E and its variants, the single-stage MELL-E mitigates robustness issues by avoiding the inherent flaws of sampling discrete codes, achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.
+		We present a novel continuous-valued tokens based language modeling approach, referred to as MELLE, for text to speech synthesis (TTS). MELLE autoregressively generates continuous mel-spectrogram frames directly from text condition, bypassing the need for vector quantization, which are originally designed for audio compression and sacrifice fidelity compared to mel-spectrograms.   Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram flux loss function to model the probability distribution of the continuous-valued tokens. (ii) we have incorporated variational inference into MELLE to facilitate sampling mechanisms, thereby enhancing the output diversity and  model robustness. Experiments demonstrate that, compared to the two-stage codec language models VALL-E and its variants, the single-stage MELLE mitigates robustness issues by avoiding the inherent flaws of sampling discrete codes, achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.
       </p>     
 	  <p>This page is for <b>research demonstration purposes</b> only.</p>
 
@@ -67,7 +67,7 @@
 	</body>
 		<p>
 			<b>Figure.</b> 
-			The overview of MELL-E. Unlike discrete-valued tokens based language modeling approaches, MELL-E generates the continuous variational mel-spectrogram conditioned on textual and acoustic prompts, using a single-stage decoder-only model as its foundational structures, coupled with the Latent Sampling Module. 
+			The overview of MELLE. Unlike discrete-valued tokens based language modeling approaches, MELLE generates the continuous variational mel-spectrogram conditioned on textual and acoustic prompts, using a single-stage decoder-only model as its foundational structures, coupled with the Latent Sampling Module. 
 		</p>
 </div>
 
@@ -85,8 +85,8 @@
 				<th style="text-align: center">English Text</th>
 				<th style="text-align: center">Speaker Prompt</th>
 				<th style="text-align: center">VALL-E 2</th>
-				<th style="text-align: center">MELL-E</th>
-				<th style="text-align: center">MELL-E-R2</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
 
 			</tr>
 			</thead>
@@ -160,8 +160,8 @@
 				<th style="text-align: center">English Text</th>
 				<th style="text-align: center">Speaker Prompt</th>
 				<th style="text-align: center">VALL-E 2</th>
-				<th style="text-align: center">MELL-E</th>
-				<th style="text-align: center">MELL-E-R2</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -225,15 +225,15 @@
 
 		<div class="table-responsive pt-3">
 			<p style="text-align: center;">
-			MELL-E can synthesize personalized speech with the hard sentences from <a href="https://ereboas.github.io/ELLAV/" target="_blank">ELLA-V</a>. The speaker prompts are sampled from the LibriSpeech dataset. 
+			MELLE can synthesize personalized speech with the hard sentences from <a href="https://ereboas.github.io/ELLAV/" target="_blank">ELLA-V</a>. The speaker prompts are sampled from the LibriSpeech dataset. 
 			</p>
 			<table class="table table-hover pt-2">
 			<thead>
 			<tr>
 				<th style="text-align: center">English Text</th>
 				<th style="text-align: center">Speaker Prompt</th>
-				<th style="text-align: center">MELL-E</th>
-				<th style="text-align: center">MELL-E-R2</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -296,15 +296,15 @@
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
 	<h2 id="Ethics-Statement" style="text-align: center;">Ethics Statement</h2>
 	<p>
-		MELL-E is purely a research project. Currently, we have no plans to incorporate MELL-E into a product or expand access
-		to the public. MELL-E could synthesize speech that maintains speaker identity and could be used for educational
+		MELLE is purely a research project. Currently, we have no plans to incorporate MELLE into a product or expand access
+		to the public. MELLE could synthesize speech that maintains speaker identity and could be used for educational
 		learning, entertainment, journalistic, self-authored content, accessibility features, interactive voice response
-		systems, translation, chatbot, and so on. While MELL-E can speak in a voice like the voice talent, the similarity, and
+		systems, translation, chatbot, and so on. While MELLE can speak in a voice like the voice talent, the similarity, and
 		naturalness depend on the length and quality of the speech prompt, the background noise, as well as other factors. It
 		may carry potential risks in the misuse of the model, such as spoofing voice identification or impersonating a specific
 		speaker. We conducted the experiments under the assumption that the user agrees to be the target speaker in speech
 		synthesis. If the model is generalized to unseen speakers in the real world, it should include a protocol to ensure that
-		the speaker approves the use of their voice and a synthesized speech detection model. If you suspect that MELL-E is
+		the speaker approves the use of their voice and a synthesized speech detection model. If you suspect that MELLE is
 		being used in a manner that is abusive or illegal or infringes on your rights or the rights of other people, you can
 		report it at the Report Abuse Portal.
 	</p>
