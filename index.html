@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+
+	<title>MELLE</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<div class="container" >
+<header role="banner">
+</header>
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<div class="text-center">
+	<h1>MELLE</h1>
+	<h2>Autoregressive Speech Synthesis without Vector Quantization</h2>
+        <!-- <h2></h2> -->
+	<br>
+
+	</div>
+	<p>
+        <b>Abstract.</b> 
+			We present MELLE, a novel continuous-valued token based language modeling approach for text-to-speech synthesis (TTS).
+			MELLE autoregressively generates continuous mel-spectrogram frames directly from text condition, bypassing the need for
+			vector quantization, which is typically designed for audio compression and sacrifices fidelity compared to
+			mel-spectrograms. Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram
+			flux loss function to model the probability distribution of the continuous-valued tokens. (ii) we have incorporated
+			variational inference into MELLE to facilitate sampling mechanisms, thereby enhancing the output diversity and model
+			robustness. Experiments demonstrate that, compared to the two-stage codec language models VALL-E and its variants, the
+			single-stage MELLE mitigates robustness issues by avoiding the inherent flaws of sampling vector-quantized codes,
+			achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.      </p>     
+
+	<p>
+
+		<!-- <br> <br> -->
+	<b>Contents</b>
+      <ul>
+        <li><a href="#model-overview">Model Overview</a></li>
+        <li><a href="#cross_infer">Zero-Shot Text-to-Speech for Cross-Sentence Task</a></li>
+		<li><a href="#conti_infer">Zero-Shot Text-to-Speech for Continuation Task</a></li>
+		<li><a href="#hard_samples">Hard Samples</a></li>
+        <li><a href="#Ethics-Statement">Ethics Statement</a></li>
+      </ul>
+	</p>   
+
+	
+</div>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="model-overview" style="text-align: center;">Model Overview</h2>
+	<body>
+	<p style="text-align: center;">
+		<img src="pics/melle-demo.png" height="500" width="800">
+	</p>
+	</body>
+		<p style="width: 100%; margin: auto; ">
+			<b>Figure.</b> 
+			The overview of MELLE. Unlike discrete-valued tokens based language modeling approaches, MELLE samples the continuous variational mel-spectrogram conditioned on textual and acoustic prompts, using a single-stage decoder-only model as its foundational structures, coupled with the Latent Sampling Module. 
+		</p>
+</div>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="cross_infer" style="text-align: center;">Zero-Shot Text-to-Speech for Cross-Sentence Task</h2>
+
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			Samples are from LibriSpeech dataset. 
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">English Text</th>
+				<th style="text-align: center">Speaker Prompt</th>
+				<th style="text-align: center">VALL-E 2</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">In a few hours the examination would commence, and he was still in the dilemma between making the facts public, and allowing the culprit to compete for the valuable scholarship.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_1580-141084-0023.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_1580-141084-0023.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_1580-141084-0023.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_1580-141084-0023.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>			
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">To teach reading, means to light the fire; every syllable spelled out sparkles.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_4507-16021-0055.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_4507-16021-0055.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_4507-16021-0055.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_4507-16021-0055.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>	
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">"This has indeed been a harassing day," continued the young man, his eyes fixed upon his friend.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_6930-75918-0006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_6930-75918-0006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_6930-75918-0006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_6930-75918-0006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">And it is made of mother's best yarn, and she knitted it herself, and everybody wants to get it away from me.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_7021-85628-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_7021-85628-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_7021-85628-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_7021-85628-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">And there you are. You will, of course, appreciate that the unfinished sentences not only save time, but also make the maneuvering much more natural.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_7176-92135-0031.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_7176-92135-0031.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_7176-92135-0031.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_7176-92135-0031.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">While the old gold and the marble stays, forever gleaming its soft strong blaze, calm in the early evening glow.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_8555-292519-0005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_8555-292519-0005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_8555-292519-0005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_8555-292519-0005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">"Yes, something, everything." said Rachel hurriedly, looking frowningly at a flower which she was twirling in her fingers.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_5683-32879-0014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_5683-32879-0014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_5683-32879-0014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_5683-32879-0014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">I greatly mourn that one so well-disposed should die in his ignorance, and I have sought a goodly hymn. Can you lead me to him?</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_prompt_1320-122617-0009.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_valle2_1320-122617-0009.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle_1320-122617-0009.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\cross_melle-r2_1320-122617-0009.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+			</tbody>
+			</table>
+			
+		</div>
+</div>
+
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="conti_infer" style="text-align: center;">Zero-Shot Text-to-Speech for Continuation Task</h2>
+
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			Samples are from LibriSpeech dataset.
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">English Text</th>
+				<th style="text-align: center">Speaker Prompt</th>
+				<th style="text-align: center">VALL-E 2</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
+
+			</tr>
+			</thead>
+			<tbody>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Unc knocked at the door of the house, and a chubby, pleasant-faced woman dressed all in blue opened it and greeted the visitors with a smile.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_1284-1180-0010.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_1284-1180-0010.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_1284-1180-0010.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_1284-1180-0010.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">The dews were suffered to exhale, and the sun had dispersed the mists and was shedding a strong and clear light in the forest, when the travelers resumed their journey.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_1320-122612-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_1320-122612-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_1320-122612-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_1320-122612-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>			
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">And often has my mother said, while on her lap I laid my head, she feared for time I was not made, but for eternity.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_3575-170457-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_3575-170457-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_3575-170457-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_3575-170457-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>	
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">In order to please her, I spoke to her of the Abbe Conti, and I had occasion to quote two lines of that profound writer.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_3729-6852-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_3729-6852-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_3729-6852-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_3729-6852-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">He had preconceived ideas about everything, and his idea about Americans was that they should be engineers or mechanics.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_4446-2271-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_4446-2271-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_4446-2271-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_4446-2271-0001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Now Delia contrived to obtain a great influence and ascendency over the minds of the children, by means of these dolls.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_7021-79740-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_7021-79740-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_7021-79740-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_7021-79740-0002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">This was what did the mischief so far as the running away was concerned.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_8463-287645-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_8463-287645-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_8463-287645-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_8463-287645-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Then he rushed downstairs into the courtyard, shouting loudly for his soldiers, and threatening to punish everybody in his dominions, if the sailorman was not recaptured.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_prompt_8555-284447-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_valle2_8555-284447-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle_8555-284447-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\continue_melle-r2_8555-284447-0000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+
+			</tbody>
+			</table>
+			
+		</div>
+</div>
+
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="hard_samples" style="text-align: center;">Hard Samples</h2>
+
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			MELLE can synthesize personalized speech with the hard sentences from <a href="https://ereboas.github.io/ELLAV/" target="_blank">ELLA-V</a>. The speaker prompts are sampled from the LibriSpeech dataset. 
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">English Text</th>
+				<th style="text-align: center">Speaker Prompt</th>
+				<th style="text-align: center">MELLE</th>
+				<th style="text-align: center">MELLE-R2</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Two thousand two hundred twenty two happily happy two hundred and twenty-two.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_61-70970-0040.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_61-70970-0040.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_61-70970-0040.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Gallant gophers gracefully gambled golden gooseberries on grandiose glaciers.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_121-121726-0004.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_121-121726-0004.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_121-121726-0004.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>			
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">The entrepreneur, driven by an insatiable insatiable insatiable insatiable insatiable desire for success, embarked on a journey filled with challenges, challenges, challenges, challenges, challenges, challenges, and triumphs.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_908-157963-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_908-157963-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_908-157963-0018.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>	
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">The shimmering sheen of the silken fabric fascinated the fashionistas, creating a cacophony of compliments.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_1284-1180-0011.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_1284-1180-0011.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_1284-1180-0011.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Learning from mistakes is is is is is is a crucial part of the journey to success.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_1580-141083-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_1580-141083-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_1580-141083-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Amidst the towering skyscrapers, the bustling cityscape echoed with the incessant hum hum hum hum hum of commerce and ambition.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_3575-170457-0021.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_3575-170457-0021.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_3575-170457-0021.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Eager otters eagerly overcame eager eager obstacles.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_4446-2275-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_4446-2275-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_4446-2275-0008.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">The best way to predict the best way to predict the future is to create it, but sometimes, the best way to predict the future is to prevent it.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_4507-16021-0054.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_4507-16021-0054.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_4507-16021-0054.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Funny ferrets fumbled fumblingly, funny funny feathers.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_5683-32866-0007.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_5683-32866-0007.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_5683-32866-0007.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Confused crabs confusedly cracked confused confused crab cakes.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_prompt_6829-68769-0022.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle_6829-68769-0022.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\hard_melle-r2_6829-68769-0022.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+			</tbody>
+			</table>
+			
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="Ethics-Statement" style="text-align: center;">Ethics Statement</h2>
+	<p>
+		MELLE is purely a research project. MELLE could synthesize speech that maintains speaker identity and could be used for
+		education, entertainment, journalistic, self-authored content, accessibility features, interactive voice response
+		systems, translation, chat-bot, and so on. While MELLE can speak in a voice like the voice talent, the similarity, and
+		naturalness depend on the length and quality of the speech prompt, the background noise, as well as other factors. It
+		may carry potential risks in the misuse of the model, such as spoofing voice identification or impersonating a specific
+		speaker. We conducted the experiments under the assumption that the user agrees to be the target speaker in speech
+		synthesis. If the model is generalized to unseen speakers in the real world, it should include a protocol to ensure that
+		the speaker approves the use of their voice and a synthesized speech detection model.
+ 
+		<p>This page is for <b>research demonstration purposes</b> only.</p>
+
+	</p>
+</div>
+ 
+</article>
+</main>
+</div>
+
+</body>
+</html>
