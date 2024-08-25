@@ -35,13 +35,13 @@
         <b>Abstract.</b> 
 			We present MELLE, a novel continuous-valued token based language modeling approach for text-to-speech synthesis (TTS).
 			MELLE autoregressively generates continuous mel-spectrogram frames directly from text condition, bypassing the need for
-			vector quantization, which is typically designed for audio compression and sacrifices fidelity compared to
-			mel-spectrograms. Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram
-			flux loss function to model the probability distribution of the continuous-valued tokens. (ii) we have incorporated
+			vector quantization, which is typically designed for audio compression and sacrifices fidelity compared to continuous
+			representations. Specifically, (i) instead of cross-entropy loss, we apply regression loss with a proposed spectrogram
+			flux loss function to model the probability distribution of the continuous-valued tokens; (ii) we have incorporated
 			variational inference into MELLE to facilitate sampling mechanisms, thereby enhancing the output diversity and model
-			robustness. Experiments demonstrate that, compared to the two-stage codec language models VALL-E and its variants, the
+			robustness. Experiments demonstrate that, compared to the two-stage codec language model VALL-E and its variants, the
 			single-stage MELLE mitigates robustness issues by avoiding the inherent flaws of sampling vector-quantized codes,
-			achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.      </p>     
+			achieves superior performance across multiple metrics, and, most importantly, offers a more streamlined paradigm.     </p>     
 
 	<p>
 
@@ -52,6 +52,7 @@
         <li><a href="#cross_infer">Zero-Shot Text-to-Speech for Cross-Sentence Task</a></li>
 		<li><a href="#conti_infer">Zero-Shot Text-to-Speech for Continuation Task</a></li>
 		<li><a href="#hard_samples">Hard Samples</a></li>
+		<li><a href="#conti_mandarin">Zero-Shot Text-to-Speech for Mandarin</a></li>
         <li><a href="#Ethics-Statement">Ethics Statement</a></li>
       </ul>
 	</p>   
@@ -223,7 +224,6 @@
 </div>
 
 
-
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<h2 id="hard_samples" style="text-align: center;">Hard Samples</h2>
 
@@ -293,7 +293,65 @@
 				</tr>
 			</tbody>
 			</table>
-			
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="conti_mandarin" style="text-align: center;">Zero-Shot Text-to-Speech for Mandarin</h2>
+
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			In addition to the model described in the paper, which was trained on English corpus, we also trained a MELLE model for Mandarin text-to-speech. <br>
+			This model was trained on <a href="https://huggingface.co/datasets/Wenetspeech4TTS/WenetSpeech4TTS" target="_blank">WenetSpeech4TTS</a> dataset and an in-house dataset, 
+			using the same model configurations and training settings as described in the paper.
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">Mandarin Text</th>
+				<th style="text-align: center">Speaker Prompt</th>
+				<th style="text-align: center">MELLE</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">对，绿色的话，它就是，嗯，不穿外套的话，穿里面的衬衣，我觉得很好看，然后的话，呃，深灰色的话，我觉得就是，嗯，配卫、外套的话就是要好看一点，就有一点纠结。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_6.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_6.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">要说别人各种各种好，其实这种话呢，不传在自己的耳朵里的话，就觉得无所谓。但是你真正有人给你讲了之后，你可能就心里还是多多少少不舒服的你知道吗？</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">它，它喜欢在那个毛拖鞋上，我也是，我也是醉了，而且不，我们不知道怎么指导它到那里上厕所，是很尴尬的事情，养了半年多长得，长得长得贼肥，然后，后来实在养不了，然后就别人也不想养，我们就是送那个宿管大叔了，不知道是吃了还是怎么样。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_9.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_9.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">就是，就可能重庆火锅我现在打个比方来说，你在当地可能随便选一家火锅，我觉得都蛮好吃的。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_2.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_2.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">对，然后他老了之后，感觉就没有什么比较好的了，就去年那个喜剧片，太好笑了。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_3.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_3.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">嗯，这倒没有过，就讨厌这个倒没有过，就合眼缘的这个的话，是真的是有过。就前一两年的嘛，然后在工作当中呢认识的一个朋友，然后她比我小，但是我感觉她思想这些方面还是比较成熟的嘛。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_4.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_4.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">对待一些事情呢，就包括说有的时候可能开完会的时候，工作当中遇到一些问题的时候，我们俩的观点想法完全是一样的，所以说</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_5.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_5.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">会不会这样，但是但是就是可能他心里那个那个意难平吧，他他的心里但是感觉平不下去，始终过不了那个坎，就觉得，我追了六七年，怎么还追不到。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_7.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_7.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">嗯，对，但是他我们有些朋友，他并没有谈过什么恋爱，但是他，就是说一些东西感觉他就是专家一样，我也是搞不懂这样的人。</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_prompt_8.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\mandarin_melle_8.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+			</tbody>
+			</table>			
 		</div>
 </div>
 
